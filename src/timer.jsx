@@ -16,15 +16,30 @@ class TimerDashboard extends Component {
 
   handleClickStart = () => {
     const isRunning = !this.state.timer.isRunning;
+    const now = Date.now();
 
-    this.setState({
-      timer: Object.assign({},
-        this.state.timer,
-        {
-          isRunning: isRunning,
-          elapsed: isRunning? 0: Date.now()
-        })
-    })
+    if(isRunning){
+      // RUNNING
+      this.setState({
+        timer: Object.assign({},
+          this.state.timer,
+          {
+            isRunning: isRunning,
+            runningSince: now
+          })
+      });
+    } else {
+      // STOPPED
+      this.setState({
+        timer: Object.assign({},
+          this.state.timer,
+          {
+            isRunning: isRunning,
+            elapsed:  now + this.state.timer.elapsed -this.state.timer.runningSince,
+            runningSince: now
+          })
+      })
+    }
   };
 
   render() {
