@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Segment} from 'semantic-ui-react';
+import {Segment, Button} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
 class TimerDashboard extends Component {
@@ -8,20 +8,38 @@ class TimerDashboard extends Component {
       initial: 1 * 60 * 1000,
       start: 0,
       elapsed: 0,
-      isRunning: false,
+      isRunning: true,
       isBeginning: true,
       runningSince: Date.now()
     }
   };
 
+  handleClickStart = () => {
+    const isRunning = !this.state.timer.isRunning;
+
+    this.setState({
+      timer: Object.assign({},
+        this.state.timer,
+        {
+          isRunning: isRunning,
+          elapsed: isRunning? 0: Date.now()
+        })
+    })
+  };
+
   render() {
     return (
-      <Timer
-        isRunning={this.state.timer.isRunning}
-        elapsed={this.state.timer.elapsed}
-        runningSince={this.state.timer.runningSince}
-        initial={this.state.timer.initial}
-      />
+      <Segment padded compact>
+        <Timer
+          isRunning={this.state.timer.isRunning}
+          elapsed={this.state.timer.elapsed}
+          runningSince={this.state.timer.runningSince}
+          initial={this.state.timer.initial}
+        />
+        <Button onClick={this.handleClickStart}>
+          {this.state.timer.isRunning ? "Stop" : "Start"}
+        </Button>
+      </Segment>
     );
   }
 }

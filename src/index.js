@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import App from './App';
 // import HelloWorld from './helloWorld';
-import Timer from './timer';
+import TimerDashboard from './timer';
 //import App from './lifecycle';
 //   <Timer elapsedTime={15}  />,
 
 ReactDOM.render(
-  <Timer elapsedTime={15}  />,
+  <TimerDashboard   />,
   document.getElementById('root')
 );
 
